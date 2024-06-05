@@ -30,9 +30,11 @@ jobs:
 
     - name: Import Existing Resources
       working-directory: ./terraform
+      env:
+        PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       run: |
-        terraform import google_container_cluster.primary projects/${{ secrets.GCP_PROJECT_ID }}/locations/us-central1/clusters/primary-cluster || true
-        terraform import google_artifact_registry_repository.my_repo projects/${{ secrets.GCP_PROJECT_ID }}/locations/us-central1/repositories/my-repo || true
+        terraform import google_container_cluster.primary projects/${{ env.PROJECT_ID }}/locations/us-central1/clusters/primary-cluster || true
+        terraform import google_artifact_registry_repository.my_repo projects/${{ env.PROJECT_ID }}/locations/us-central1/repositories/my-repo || true
 
     - name: Apply Terraform
       working-directory: ./terraform
