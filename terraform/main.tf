@@ -21,6 +21,8 @@ resource "google_container_cluster" "primary" {
 
   node_config {
     machine_type = "e2-medium"
+    disk_size_gb = 100
+
   }
 
   initial_node_count = 3
