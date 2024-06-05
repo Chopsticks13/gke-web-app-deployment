@@ -20,11 +20,11 @@ resource "google_container_cluster" "primary" {
   location = var.region
 
   node_config {
-    machine_type = "e2-medium"
-    disk_size_gb = 100
+    machine_type = "e2-small"
+    disk_size_gb = 10
 
   }
 
-  initial_node_count = 3
+  initial_node_count = 1
 }
 
