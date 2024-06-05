@@ -20,6 +20,7 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Configure GCP Credentials
+      id: auth
       uses: google-github-actions/auth@v0.4.0
       with:
         credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
@@ -30,6 +31,6 @@ jobs:
 
     - name: Apply Terraform
       working-directory: ./terraform
-      run: terraform apply -auto-approve -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var "region=us-central1"
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+      run: terraform apply -auto-approve -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var "region=us-central1"
