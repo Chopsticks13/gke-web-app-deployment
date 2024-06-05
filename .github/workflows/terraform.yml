@@ -34,7 +34,3 @@ jobs:
       run: terraform apply -auto-approve
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-    - name: Trigger Cloud Build
-      run: |
-        gcloud builds submit --config cloudbuild.yaml
