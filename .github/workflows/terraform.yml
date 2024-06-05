@@ -20,7 +20,6 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Configure GCP Credentials
-      id: 'auth'
       uses: google-github-actions/auth@v0.4.0
       with:
         credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
@@ -29,6 +28,14 @@ jobs:
       working-directory: ./terraform
       run: terraform init
 
+    - name: Import Existing Resources
+      working-directory: ./terraform
+      run: |
+        terraform import google_container_cluster.primary projects/${{ secrets.GCP_PROJECT_ID }}/locations/us-central1/clusters/primary-cluster || true
+        terraform import google_artifact_registry_repository.my_repo projects/${{ secrets.GCP_PROJECT_ID }}/locations/us-central1/repositories/my-repo || true
+
     - name: Apply Terraform
       working-directory: ./terraform
       run: terraform apply -auto-approve -var "project_id=${{ secrets.GCP_PROJECT_ID }}" -var "region=us-central1"
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
