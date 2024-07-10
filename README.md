@@ -25,25 +25,6 @@ This project deploys a simple Node.js web application to a GKE cluster. It inclu
 - Continuous Integration and Continuous Deployment using GitHub Actions.
 - Deployment of the containerized application to GKE.
 
-## Directory Structure
-
-gke-web-app-deployment/
-├── .github/
-│   └── workflows/
-│       └── terraform.yml
-├── terraform/
-│   ├── backend.tf
-│   ├── main.tf
-│   ├── outputs.tf
-│   ├── variables.tf
-├── .gitignore
-├── Dockerfile
-├── app.js
-├── package-lock.json
-├── package.json
-└── README.md
-
-
 ## Prerequisites
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 - [Terraform](https://www.terraform.io/downloads.html)
