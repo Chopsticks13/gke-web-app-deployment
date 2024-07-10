@@ -63,6 +63,7 @@ gke-web-app-deployment/
 gcloud auth login
 gcloud config set project YOUR_PROJECT_ID
 gcloud auth application-default login
+```
 
 ## Configure Terraform:
 
@@ -70,20 +71,25 @@ Update terraform/backend.tf with your Google Cloud Storage bucket for state mana
 Update terraform/variables.tf with your GKE cluster and network configuration.
 
 Initialize and apply Terraform configuration:
+```
 cd terraform
 terraform init
 terraform apply
+```
 
 Build and push Docker image:
+```
 docker build -t gcr.io/YOUR_PROJECT_ID/gke-web-app:latest .
 docker push gcr.io/YOUR_PROJECT_ID/gke-web-app:latest
+```
 
 Deploy the application:
 Terraform script will handle deploying the application to GKE.
 
 Usage
 Access the deployed application via the external IP of the GKE service:
-kubectl get services
+
+`kubectl get services`
 
 
 Contributing
